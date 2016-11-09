@@ -1,7 +1,8 @@
 import * as React from 'react';
-import Icon from '../Icon/Icon';
-import * as classnames from 'classnames';
 import * as _ from 'lodash';
+import * as classnames from 'classnames';
+
+import Icon from '../Icon/Icon';
 
 interface IButtonProps extends React.Props<any> {
     icon?: string;
@@ -33,7 +34,11 @@ const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => 
 
     const handleOnClick = (e: React.SyntheticEvent<any>) => {
         e.preventDefault();
-        props.onClick();
+        if(_.isFunction(props.onClick)){
+            props.onClick();
+        } else if(props.onClick){
+            console.warn("props.onClick is not a function");
+        }
     }
 
     return (

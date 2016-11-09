@@ -1,10 +1,13 @@
 import * as React from 'react';
+import * as _ from 'lodash';
 import * as classnames from 'classnames';
+
 import Icon from '../Icon/Icon';
 
 interface INavItemProps extends React.Props<any> {
     icon?: string;
     label?: string;
+    iconStyle?: _.Dictionary<any>;
     eventKey?: number | string;
     onClick?: (eventKey:number|string) => void; 
 }
@@ -13,6 +16,7 @@ const NavItem: React.StatelessComponent<INavItemProps> = (props: INavItemProps) 
         icon,
         label,
         eventKey,
+        iconStyle = {},
         onClick
     } = props;
     const getNavItemClassNameConfig = () => {
@@ -30,13 +34,13 @@ const NavItem: React.StatelessComponent<INavItemProps> = (props: INavItemProps) 
 
     return (
         <a href="#" className={getNavItemClassNameConfig()} onClick={handleOnClick}>
-            {renderIcon(icon)}
+            {renderIcon(icon, iconStyle)}
             {label}
         </a>
     );
 }
 
-function renderIcon(icon: string): React.ReactNode {
+function renderIcon(icon: string, style:_.Dictionary<any>): React.ReactNode {
     let iconUi: React.ReactNode;
     if (icon) {
         const getIconClassNameConfig = () => {
@@ -46,7 +50,7 @@ function renderIcon(icon: string): React.ReactNode {
             }
             return classnames(config);
         };
-        iconUi = <span className={getIconClassNameConfig()}></span>
+        iconUi = <span style={style} className={getIconClassNameConfig()}></span>
     }
     return iconUi;
 }
