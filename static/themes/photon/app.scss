@@ -21,6 +21,11 @@
 @import './sass/tables.scss';
 @import './split-pane.scss';
 
+form {
+    padding-right: 500px;
+    padding-top: 25px;
+}
+
 .window .toolbar-header h1,h2,h3,h4,h5 {
     width: 100%;
 }

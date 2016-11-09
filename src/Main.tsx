@@ -1,3 +1,4 @@
+import '../static/themes/base/base.less';
 import '../static/themes/photon/app.scss';
 
 import * as Photon from './photon_components';
