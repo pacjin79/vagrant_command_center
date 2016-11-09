@@ -4,7 +4,7 @@ import * as React from 'react';
 import { INavItemModel, INavModel } from '../../types';
 
 interface ISideNavProps extends INavModel {
-
+    routing: History.Location;
 }
 
 class SideNav extends React.Component<ISideNavProps, void> {
@@ -34,16 +34,23 @@ class SideNav extends React.Component<ISideNavProps, void> {
 
     renderNavItems() {
         const {
-            navData
+            navData,
+            routing
         } = this.props;
 
         return _(navData).map((navItems: INavItemModel[], categoryName: string) => {
             const navItemsUi: React.ReactNode[] = _(navItems).map((navItem: INavItemModel, index:number) => {
+                let isActive = false;
+                const routingPath = (routing.pathname.indexOf('/') !== -1) ? routing.pathname.replace('/', '') : routing.pathname;
+                if(navItem.path === routingPath){
+                    isActive = true;
+                }
                 return (
                     <Photon.NavItem key={`${_.camelCase(categoryName)} - ${index}`} icon={navItem.icon}
                         iconStyle={navItem.iconStyle}
                         eventKey={navItem.path}
                         onClick={this.onNavItemClick}
+                        active={isActive}
                         label={navItem.label} />
                 );
             }).value();

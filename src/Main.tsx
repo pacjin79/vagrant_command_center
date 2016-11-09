@@ -12,6 +12,7 @@ import {push} from 'react-router-redux';
 import SplitPane = require('react-split-pane');
 
 interface IMainPageProps extends INavEnabledProps {
+    location: History.Location;
 }   
 
 class MainPage extends React.Component<IMainPageProps, void> {
@@ -102,8 +103,7 @@ class MainPage extends React.Component<IMainPageProps, void> {
                     label: "Sync Folder"
                 }]
         }
-
-        return <SideNav navData={navData} navigate={this.props.navigate}/>
+        return <SideNav navData={navData} navigate={this.props.navigate} routing={this.props.location}/>
     }
 }
 
