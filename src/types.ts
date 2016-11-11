@@ -14,6 +14,8 @@ export interface IAppState {
 
 export interface INavEnabledProps extends React.Props<any> {
     navigate: (path: string) => void;
+    goBack:() => void;
+    goForward:() => void;
 }
 
 //navigation data structure
@@ -35,9 +37,4 @@ export interface IFormInputProps extends React.Props<any> {
     bsSize?: "xs" | "sm" | "md" | "lg" | "hg";
     placeholder?: string;
     value?:string;
-}
-
-export interface ISelectOption {
-    label: string;
-    value: string;
 }

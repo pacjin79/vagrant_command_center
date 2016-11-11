@@ -1,4 +1,5 @@
-import {combineReducers, Reducer } from 'redux';
+import {Reducer, combineReducers} from 'redux';
+
 import {currentPage} from './PageReducer';
 import {routerReducer} from 'react-router-redux';
 import undo from 'redux-undo';

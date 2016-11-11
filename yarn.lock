@@ -16,6 +16,10 @@
   version "0.0.31"
   resolved "https://registry.yarnpkg.com/@types/classnames/-/classnames-0.0.31.tgz#05372b801af9e33fd112e93b6df7632aa56f0637"
 
+"@types/dustjs-linkedin":
+  version "1.2.30"
+  resolved "https://registry.yarnpkg.com/@types/dustjs-linkedin/-/dustjs-linkedin-1.2.30.tgz#e304cb1d3c3cc1b4519c8b7279c1ed0d718a90f7"
+
 "@types/electron":
   version "1.4.24"
   resolved "https://registry.yarnpkg.com/@types/electron/-/electron-1.4.24.tgz#825c224a33b1bf802725286b8cc1f7af5f43657f"
@@ -809,6 +813,21 @@ chokidar@^1.0.0:
   optionalDependencies:
     fsevents "^1.0.0"
 
+chokidar@~1.5.1:
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.5.2.tgz#293e728640cc93dd8277424334b3c6d4ad3a348a"
+  dependencies:
+    anymatch "^1.3.0"
+    async-each "^1.0.0"
+    glob-parent "^2.0.0"
+    inherits "^2.0.1"
+    is-binary-path "^1.0.0"
+    is-glob "^2.0.0"
+    path-is-absolute "^1.0.0"
+    readdirp "^2.0.0"
+  optionalDependencies:
+    fsevents "^1.0.0"
+
 chownr@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.0.1.tgz#e2a75042a9551908bebd25b8523d5f9769d79181"
@@ -833,6 +852,13 @@ clean-css@3.4.x:
   dependencies:
     commander "2.8.x"
     source-map "0.4.x"
+
+cli@~0.11.2:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/cli/-/cli-0.11.3.tgz#7b0cd3de990e452925667c0dbaffdc9f7f2a9a15"
+  dependencies:
+    exit "0.1.2"
+    glob "^7.0.5"
 
 cliui@^2.1.0:
   version "2.1.0"
@@ -1479,6 +1505,13 @@ duplexify@^3.2.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
+dustjs-linkedin:
+  version "2.7.4"
+  resolved "https://registry.yarnpkg.com/dustjs-linkedin/-/dustjs-linkedin-2.7.4.tgz#1244da38e774bf528d2ab49966d2210c0bc9c7c4"
+  dependencies:
+    chokidar "~1.5.1"
+    cli "~0.11.2"
+
 each-async@^1.0.0, each-async@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/each-async/-/each-async-1.1.1.tgz#dee5229bdf0ab6ba2012a395e1b869abf8813473"
@@ -1726,6 +1759,10 @@ executable@^1.0.0:
   resolved "https://registry.yarnpkg.com/executable/-/executable-1.1.0.tgz#877980e9112f3391066da37265de7ad8434ab4d9"
   dependencies:
     meow "^3.1.0"
+
+exit@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/exit/-/exit-0.1.2.tgz#0632638f8d877cc82107d30a0fff1a17cba1cd0c"
 
 expand-brackets@^0.1.4:
   version "0.1.5"

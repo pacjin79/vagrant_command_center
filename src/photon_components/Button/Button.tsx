@@ -11,7 +11,8 @@ interface IButtonProps extends React.Props<any> {
     isDropDown?: boolean;
     isActive?: boolean;
     alignment?: "right" | "left";
-    onClick?: () => void;
+    eventKey?: string | number;
+    onClick?: (eventKey?:string | number) => void;
 }
 
 const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => {
@@ -21,7 +22,8 @@ const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => 
         text,
         isActive = false,
         alignment = "left",
-        isDropDown = false
+        isDropDown = false,
+        eventKey
     } = props;
 
     const className = classnames({
@@ -35,7 +37,7 @@ const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => 
     const handleOnClick = (e: React.SyntheticEvent<any>) => {
         e.preventDefault();
         if(_.isFunction(props.onClick)){
-            props.onClick();
+            props.onClick(eventKey);
         } else if(props.onClick){
             console.warn("props.onClick is not a function");
         }
