@@ -1,0 +1,10 @@
+{
+    "vagrantCmd":{
+        "lookUps": {
+            "os":[
+                {"label": "", "value":""},
+                {"label": "Debien Linux", "value":"db"}
+            ]
+        }
+    }
+}

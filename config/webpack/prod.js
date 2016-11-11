@@ -5,12 +5,13 @@ const baseConfig = require('./base'),
 
 const prodConfig = baseConfig;
 
-prodConfig.entry = [
-	'./src/index'
-];
+prodConfig.entry = {
+	app: './main/entry',
+	bundle: './src/index'
+};
 prodConfig.devtools = false;
 prodConfig.debug = false;
-prodConfig.plugins = _.concat(prodConfig.plugins, [
+prodConfig.plugins = _.concat(baseConfig.plugins, [
 	new webpack.optimize.DedupePlugin()
 ]);
 

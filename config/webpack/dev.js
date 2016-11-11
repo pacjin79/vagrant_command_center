@@ -8,10 +8,12 @@ const devConfig = baseConfig;
 const port = process.env.PORT || 9090;
 
 
-devConfig.entry = [
-	`webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
-	'./src/index'
-];
+devConfig.entry = {
+	bundle: [
+		`webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
+		'./src/index'
+	]
+}
 
 devConfig.devtool = "source-map";
 

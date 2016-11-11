@@ -6,6 +6,11 @@ import {
     Row,
 } from 'react-bootstrap';
 import {
+    FormActionBar,
+    FormInput,
+    FormSelect,
+} from '../../photon_components';
+import {
     Input,
     Select,
 } from 'formsy-react-components';
@@ -31,28 +36,26 @@ class ConfigOSPage extends React.Component<IConfigOSPageProps, void> {
     }
 
     renderForm() {
+        const options = [
+            { label: "", value: "" },
+            { label: "Debien Linux", value: "dbl" }
+        ];
+        const versionOptions = [
+            { label: "", value: ""},
+            { label: "1.0", value: "1.0"}
+        ]
         return (
             <Formsy.Form ref="form">
-                <div style={{width: "250px"}}>
-                    <Input
-                        name="test"
-                        type="email"
-                        label="Email Address"
-                        layout="vertical"
-                        value="" />
-                </div>
-                <div style={{width: "200px"}}>
-                    <Input
-                        name="test2"
-                        type="email"
-                        label="Email Address"
-                        layout="vertical"
-                        value="" />
-                </div>
-                <div className="form-actions">
-                    <button type="submit" className="btn btn-form btn-default">Cancel</button>
-                    <button type="submit" className="btn btn-form btn-primary">OK</button>
-                </div>
+                <FormSelect
+                    name="os"
+                    label="OS"
+                    bsSize="lg"
+                    options={options} />
+                <FormSelect
+                    name="version"
+                    label="Version"
+                    bsSize="sm"
+                    options={versionOptions} />
             </Formsy.Form>
         );
     }

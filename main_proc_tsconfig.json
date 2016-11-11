@@ -10,14 +10,13 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "outDir": "main"
+    "outDir": "build"
   },
   "include": [
-     "main_ts/**/*"
+     "main/**/*"
   ],
   "exclude": [
     "node_modules",
-    "build",
-    "main"
+    "build"
   ]
 }

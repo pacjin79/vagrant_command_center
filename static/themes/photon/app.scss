@@ -26,9 +26,30 @@ form {
     padding-top: 25px;
 }
 
+.formControlSize-md {
+    width: 50%;
+}
+.formControlSize-xs {
+    width: 25%;
+}
+.formControlSize-sm {
+    width: 35%;
+}
+.formControlSize-lg {
+    width: 80%;
+}
+.formControlSize-hg {
+    width: 100%;
+}
+
+.formControlSize-md {
+    width: 50%;
+}
+
 .window .toolbar-header h1,h2,h3,h4,h5 {
     width: 100%;
 }
 .window .toolbar-footer h1,h2,h3,h4,h5 {
     width: 100%;
 }
+

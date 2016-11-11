@@ -27,3 +27,17 @@ export interface INavItemModel {
 export interface INavModel extends INavEnabledProps {
     navData: _.Dictionary<Array<INavItemModel>>;
 }
+
+//Forms data structure
+export interface IFormInputProps extends React.Props<any> {
+    name: string;
+    label?: string;
+    bsSize?: "xs" | "sm" | "md" | "lg" | "hg";
+    placeholder?: string;
+    value?:string;
+}
+
+export interface ISelectOption {
+    label: string;
+    value: string;
+}
