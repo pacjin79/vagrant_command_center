@@ -1,49 +1,47 @@
-import '../static/themes/base/base.less';
 import '../static/themes/photon/app.scss';
-import { } from 'react-bootstrap';
 
 import * as Photon from './photon_components';
 import * as React from 'react';
 
 import { ComponentDecorator, Dispatch, connect } from 'react-redux';
-import { INavEnabledProps, INavItemModel } from './types';
+import { INavEnabledProps, INavItemModel, IToggleSideMenu } from './types';
 import { goBack, goForward, push } from 'react-router-redux';
 
+import { CALL_SERVICE } from './services/ServicesMiddleware';
+import HeaderNav from './components/HeaderNav/HeaderNav';
+import { IAppState } from './types';
 import SideNav from './components/SideNav/SideNav';
+import { actions } from './actions';
 
 import SplitPane = require('react-split-pane');
 
 interface IMainPageProps extends INavEnabledProps {
     location: History.Location;
+    save: (request: any) => void;
 }
 
 class MainPage extends React.Component<IMainPageProps, void> {
 
     constructor(props: IMainPageProps) {
         super(props);
-        this.handleNavigation = this.handleNavigation.bind(this);
+        this.showSideMenu = this.showSideMenu.bind(this);
     }
 
-    handleNavigation(eventKey: string | number) {
-        if (eventKey === 1) {
-            this.props.goBack();
-        } else {
-            this.props.goForward();
-        }
-    }
     render() {
         return (
             <Photon.Window>
                 <Photon.Header>
-                    <Photon.ToolBar className="pull-left">
-                        <Photon.ButtonGroup>
-                            <Photon.Button eventKey={1} icon="left-open-big" onClick={this.handleNavigation} />
-                            <Photon.Button eventKey={2} icon="right-open-big" onClick={this.handleNavigation}/>
-                        </Photon.ButtonGroup>
-                    </Photon.ToolBar>
+                    <HeaderNav
+                        save={this.props.save}
+                        navigate={this.props.navigate}
+                        goBack={this.props.goBack}
+                        goForward={this.props.goForward}
+                        location={this.props.location} />
                     <Photon.ToolBar className="pull-right">
                         <Photon.ButtonGroup>
-                            <Photon.Button icon="home" isActive={true} onClick={() => alert('clicked home')} />
+                            <Photon.Button icon="home" isActive={true} onClick={() => {
+                                this.props.navigate("/confCluster");
+                            } } />
                             <Photon.Button icon="folder" onClick={() => alert('clicked folder')} />
                         </Photon.ButtonGroup>
                         <Photon.Button icon="megaphone" alignment="right" isDropDown={true} />
@@ -64,19 +62,27 @@ class MainPage extends React.Component<IMainPageProps, void> {
                 backgroundColor: "#f5f5f4"
             }
         };
+        if (this.showSideMenu()) {
+            return (
+                <Photon.PaneGroup>
+                    <SplitPane {...paneProps} split="vertical" defaultSize="20%" minSize={100}>
+                        <div>
+                            {this.renderSideNav()}
+                        </div>
+                        <div>
+                            {this.props.children}
+                        </div>
+                    </SplitPane>
+                </Photon.PaneGroup>
+            );
+        } else {
+            return(
+                <Photon.PaneGroup>
+                    {this.props.children}
+                </Photon.PaneGroup>
+            );
+        }
 
-        return (
-            <Photon.PaneGroup>
-                <SplitPane {...paneProps} split="vertical" defaultSize="20%" minSize={100}>
-                    <div>
-                        {this.renderSideNav()}
-                    </div>
-                    <div>
-                        {this.props.children}
-                    </div>
-                </SplitPane>
-            </Photon.PaneGroup>
-        )
     }
 
     renderSideNav() {
@@ -125,14 +131,29 @@ class MainPage extends React.Component<IMainPageProps, void> {
             goForward={this.props.goForward}
             routing={this.props.location} />
     }
+
+    private showSideMenu(): boolean {
+        const {
+            location
+        } = this.props;
+        if (location.pathname === '/') {
+            //landing page, do not mount side menu
+            return false;
+        }
+
+        return true;
+    }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: IAppState, ownerProps: IMainPageProps) => {
     return {
     };
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    const {
+        pageActions
+    } = actions;
     return {
         navigate: (path: string) => {
             dispatch(push(path));
@@ -142,6 +163,9 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
         },
         goForward: () => {
             dispatch(goForward());
+        },
+        save: (request: any) => {
+            dispatch(pageActions.save(request));
         }
     }
 }

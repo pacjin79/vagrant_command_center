@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
+import ConfigClusterPage from './pages/ConfigClusterPage/ConfigClusterPage';
 import ConfigOSPage from './pages/ConfigOS/ConfigOSPage';
 import ConfigProvider from './pages/ConfigProvider/ConfigProvider';
 import { IAppState } from "./types";
@@ -15,7 +16,7 @@ import { Store } from "redux";
 const rootRoute: PlainRoute = {
     path: '/',
     indexRoute: {
-        component: ConfigOSPage
+        component: LandingPage
     },
     childRoutes: [
         {
@@ -25,6 +26,10 @@ const rootRoute: PlainRoute = {
         {
             path: 'confProv',
             component: ConfigProvider
+        },
+        {
+            path: 'confCluster',
+            component: ConfigClusterPage
         }
     ],
     component: Main
@@ -33,7 +38,8 @@ const rootRoute: PlainRoute = {
 const initialState: IAppState = {
     currentPage: {
         notifications: []
-    }
+    },
+    clusters: []
 };
 
 

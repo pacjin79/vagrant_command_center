@@ -1,3 +1,7 @@
+$fa-font-path: "../node_modules/font-awesome/fonts";
+$icon-font-path: "../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
+
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import '~font-awesome/scss/font-awesome.scss';
 
 //Photon Imports
@@ -43,6 +47,10 @@ form {
 
 .formControlSize-md {
     width: 50%;
+}
+
+.container {
+    margin-top: 20px;
 }
 
 .window .toolbar-header h1,h2,h3,h4,h5 {
