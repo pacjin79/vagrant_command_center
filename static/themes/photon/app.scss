@@ -25,6 +25,48 @@ $icon-font-path: "../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
 @import './sass/tables.scss';
 @import './split-pane.scss';
 
+//variables
+$margin-gap-xs: 5px;
+$margin-gap-sm: 15px;
+$margin-gap-md: 25px;
+$margin-gap-lg: 35px;
+$margin-gap-hg: 55px;
+
+//functions
+@function getPixelForSize($size){
+    @if $size == "xs" {
+        @return $margin-gap-xs;
+    }
+    @if $size == "md" {
+        @return $margin-gap-md;
+    }
+    @if $size == "lg" {
+        @return $margin-gap-lg;
+    }
+    @if $size == "hg" {
+        @return $margin-gap-hg;
+    }
+    @if $size == "na" {
+        @return 0;
+    }
+}
+
+//mixins
+@mixin make-margin-gap($leftGap, $topGap, $rightGap, $bottomGap) {
+    margin-left: getPixelForSize($leftGap);
+    margin-right: getPixelForSize($rightGap);
+    margin-top: getPixelForSize($topGap);
+    margin-bottom: getPixelForSize($bottomGap);
+}
+
+@mixin make-padding-gap($leftGap, $topGap, $rightGap, $bottomGap) {
+    padding-left: getPixelForSize($leftGap);
+    padding-right: getPixelForSize($rightGap);
+    padding-top: getPixelForSize($topGap);
+    padding-bottom: getPixelForSize($bottomGap);
+}
+
+//styles
 form {
     padding-top: 25px;
 }
@@ -60,3 +102,23 @@ form {
     width: 100%;
 }
 
+//gaps
+.margin-xs {
+    @include make-margin-gap("xs", "xs", "xs", "xs");
+}
+.margin-xs-left {
+    @include make-margin-gap("xs", "na", "na", "na");
+}
+.margin-xs-right {
+    @include make-margin-gap("na", "na", "xs", "na");
+}
+
+.padding-xs {
+    @include make-padding-gap("xs", "xs", "xs", "xs");
+}
+.padding-xs-left {
+    @include make-padding-gap("xs", "na", "na", "na");
+}
+.padding-xs-right {
+    @include make-padding-gap("na", "na", "xs", "na");
+}

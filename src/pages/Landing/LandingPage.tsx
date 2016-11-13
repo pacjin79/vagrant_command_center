@@ -12,11 +12,12 @@ import Card from '../../components/Card/Card';
 import { push } from 'react-router-redux';
 
 import SplitPane = require('react-split-pane');
+
 interface ILandingPageProps extends React.Props<any> {
     navigate: (path: string) => void;
 }
 
-class LandingPage extends React.Component<ILandingPageProps, void> implements IToggleSideMenu {
+class LandingPage extends React.Component<ILandingPageProps, void> {
     constructor(props: ILandingPageProps) {
         super(props);
         this.onNavItemClick = this.onNavItemClick.bind(this);
@@ -26,38 +27,50 @@ class LandingPage extends React.Component<ILandingPageProps, void> implements IT
         this.props.navigate(eventKey);
     }
 
-    enableSideMenu() {
-        return false;
-    }
-
     render() {
-        const paneProps = {
-            pane1Style: {
-                backgroundColor: "#f5f5f4"
-            }
-        };
-
         return (
-            <div className="container">
-                <Col sm={12}>
-                    <Row>
-                        <Col sm={6}>
-                            <Card
-                                icon="cloud"
-                                type="alert"
-                                linkto="/confos">
-                            </Card>
-                        </Col>
-                        <Col sm={6}>
-                            <Card
-                                icon="server"
-                                type="alert"
-                                linkto="/confProv">
-                            </Card>
-                        </Col>
-                    </Row>
-                </Col>
-            </div>
+           <table className="table-striped">
+                <thead>
+                    <tr>
+                        <th>Cluster</th>
+                        <th>Number of machines</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                        <td>
+                            <Photon.Icon icon="cloud" label="Docker Storm"/>
+                        </td>
+                        <td>3</td>
+                        <td>Up</td>
+                        <td>
+                            <Photon.ToolBar>
+                                <Photon.ButtonGroup>
+                                    <Photon.Button icon="cog" />
+                                    <Photon.Button icon="cancel" />
+                                </Photon.ButtonGroup>
+                            </Photon.ToolBar>
+                       </td>
+                    </tr>
+                     <tr>
+                        <td>
+                            <Photon.Icon icon="cog" label="Kafka Cluster"/>
+                        </td>
+                        <td>3</td>
+                        <td>Halted</td>
+                        <td>
+                            <Photon.ToolBar>
+                                <Photon.ButtonGroup>
+                                    <Photon.Button icon="cog" />
+                                    <Photon.Button icon="cancel" />
+                                </Photon.ButtonGroup>
+                            </Photon.ToolBar>
+                       </td>
+                    </tr>
+                </tbody>
+           </table>
         );
     }
 }
