@@ -38,6 +38,7 @@ export interface INavItemModel {
     icon?: string;
     iconStyle?: _.Dictionary<any>;
     label?: string;
+    onClick?: (eventKey?:string|number) => void;
 }
 
 export interface INavModel extends INavEnabledProps {
@@ -51,8 +52,4 @@ export interface IFormInputProps extends React.Props<any> {
     bsSize?: "xs" | "sm" | "md" | "lg" | "hg";
     placeholder?: string;
     value?:string;
-}
-
-export interface IToggleSideMenu {
-    enableSideMenu: () => boolean;
 }

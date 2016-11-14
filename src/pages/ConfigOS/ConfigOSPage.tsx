@@ -2,6 +2,7 @@ import * as Formsy from 'formsy-react';
 import * as Lookups from '../../lookups';
 import * as React from 'react';
 
+import {default as AbstractPage, IAbstractPageProps} from '../AbstractPage';
 import {
     Col,
     Row,
@@ -12,10 +13,14 @@ import {
     FormSelect,
 } from '../../photon_components';
 
-interface IConfigOSPageProps extends React.Props<any> {
+import {
+    IMainPageConfig,
+} from '../../Main';
+
+interface IConfigOSPageProps extends IAbstractPageProps {
 }
 
-class ConfigOSPage extends React.Component<IConfigOSPageProps, void> {
+class ConfigOSPage extends AbstractPage<IConfigOSPageProps> {
     constructor(props: IConfigOSPageProps) {
         super(props);
     }
@@ -30,6 +35,14 @@ class ConfigOSPage extends React.Component<IConfigOSPageProps, void> {
                 </Row>
             </div>
         );
+    }
+
+    public provideConfigMain():IMainPageConfig {
+
+        return {
+            hasSideMenu: true
+        }
+
     }
 
     renderForm() {
