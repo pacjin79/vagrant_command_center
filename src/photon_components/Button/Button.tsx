@@ -6,12 +6,13 @@ import Icon from '../Icon/Icon';
 
 interface IButtonProps extends React.Props<any> {
     icon?: string;
-    bsStyle?: "default" | "primary";
-    text?: string;
+    bsStyle?: "default" | "primary" | "positive" | "negative" | "warning";
+    withText?: boolean;
     isDropDown?: boolean;
     isActive?: boolean;
     alignment?: "right" | "left";
     eventKey?: string | number;
+    required?: boolean;
     onClick?: (eventKey?:string | number) => void;
 }
 
@@ -19,7 +20,7 @@ const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => 
     const {
         icon,
         bsStyle = "default",
-        text,
+        withText = false,
         isActive = false,
         alignment = "left",
         isDropDown = false,
@@ -45,7 +46,7 @@ const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => 
 
     return (
         <button className={className} onClick={handleOnClick}>
-            {renderIcon(icon, text)}
+            {renderIcon(icon, withText)}
             {props.children}
         </button>
     );
@@ -53,13 +54,13 @@ const Button: React.StatelessComponent<IButtonProps> = (props: IButtonProps) => 
 
 
 
-function renderIcon(icon: string, text: string): React.ReactNode {
+function renderIcon(icon: string, withText: boolean): React.ReactNode {
     let iconUi: React.ReactNode;
     if (!_.isUndefined(icon)) {
         const className = classnames({
             "icon": (icon !== null),
             ["icon-" + icon]: (icon !== null),
-            "icon-text": (text !== undefined && text !== null)
+            "icon-text": withText
         })
         iconUi = <span className={className} />
     }

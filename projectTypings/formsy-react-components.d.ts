@@ -22,7 +22,8 @@ declare module "formsy-react-components" {
         disabled?: boolean;
         labelClassName?: string | Array<string>;
         elementWrapperClassName?: string | Array<string>;
-        rowClassName?: string | Array<string>
+        rowClassName?: string | Array<string>;
+        help?: string;        
     }
 
     type FormsyInputType = "text" | "email";
@@ -45,12 +46,21 @@ declare module "formsy-react-components" {
         options: Array<IFormsyOption>;
     }
 
+    interface IFormsyCheckboxGroupProps extends IFormsySelectProps {
+    }
+
+    interface IFormsyCheckboxProps extends IFormsyGeneralProps {
+        rowLabel?: string;
+    }
+
     interface IFormsyTexareaProps extends IFormsyGeneralProps {
         rows?: number;
         cols?: number;
     }
 
     var Input: React.ClassicComponentClass<IFormsyInputProps>;
+    var Checkbox: React.ClassicComponentClass<IFormsyCheckboxProps>;
+    var CheckboxGroup: React.ClassicComponentClass<IFormsyCheckboxGroupProps>;
     var Textarea: React.ClassicComponentClass<IFormsyTexareaProps>;
     var Row: React.ClassicComponentClass<IFormsyRowProps>;
     var Select: React.ClassicComponentClass<IFormsySelectProps>;

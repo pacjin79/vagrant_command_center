@@ -12,7 +12,7 @@ abstract class AbstractPage<P extends IAbstractPageProps> extends React.Componen
 
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const {
             configMain
         } = this.props;

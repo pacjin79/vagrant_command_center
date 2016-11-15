@@ -16,6 +16,7 @@ export interface IMachine {
 
 export interface ICluster {
     clusterId: string;
+    clusterName: string;
     machines: Array<IMachine>;
 }
 
@@ -52,4 +53,20 @@ export interface IFormInputProps extends React.Props<any> {
     bsSize?: "xs" | "sm" | "md" | "lg" | "hg";
     placeholder?: string;
     value?:string;
+    required?:boolean;
+}
+
+//service data structure
+export interface IServiceResponse {
+    status: number; //use http status code 
+    responseData?: any;
+}
+export interface IServiceRequest {
+    serviceId:string;
+    operation: string;
+    payload: any;
+}
+export interface IService {
+    execute: (request:IServiceRequest)=>IServiceResponse | void;
+    provideId: () => string;
 }

@@ -13,3 +13,5 @@ export {default as FormActionBar} from './Form/FormActionBar';
 export {default as FormInput} from './Form/FormInput';
 export {default as FormSelect} from './Form/FormSelect';
 export {default as Icon} from './Icon/Icon';
+export {default as FormCheckbox} from './Form/FormCheckbox';
+export {default as Table} from './Table/Table';
