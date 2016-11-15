@@ -67,6 +67,6 @@ export interface IServiceRequest {
     payload: any;
 }
 export interface IService {
-    execute: (request:IServiceRequest)=>IServiceResponse | void;
+    execute: (request:IServiceRequest, appState: IAppState)=>IServiceResponse | void;
     provideId: () => string;
 }

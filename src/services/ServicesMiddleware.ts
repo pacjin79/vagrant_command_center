@@ -23,5 +23,5 @@ export default (store:Store<IAppState>) => (next:any) => (action:any):Middleware
 
 function handleServiceOrchestration(serviceRequest:IServiceRequest, state:IAppState){
     const service = getServiceById(serviceRequest.serviceId);
-    service.execute(serviceRequest);
+    service.execute(serviceRequest, state);
 }

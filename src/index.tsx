@@ -1,3 +1,4 @@
+import * as Electron from 'electron';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
@@ -12,6 +13,8 @@ import { ReduxConfigDev } from '../config/redux/dev';
 import { ReduxConfigProd } from '../config/redux/prod';
 import RootComponentDev from 'RootComponentDev';
 import { Store } from "redux";
+
+const remote = Electron.remote;
 
 const rootRoute: PlainRoute = {
     path: '/',
@@ -35,17 +38,25 @@ const rootRoute: PlainRoute = {
     component: Main
 };
 
-const initialState: IAppState = {
-    currentPage: {
-        notifications: []
-    },
-    clusters: []
-};
+const IOUtils = remote.require('./local/IOUtils');
+IOUtils.loadAppStateFromFs().then((data: Buffer) => {
+    let initialState: IAppState = {
+        currentPage: {
+            notifications: []
+        },
+        clusters: []
+    };
+    if(data) {
+        initialState = JSON.parse(data.toString());
+    }
 
+    let store: Store<IAppState> = ReduxConfigDev.configureStore(initialState);
+    const Root = <RootComponentDev store={store} routes={rootRoute} />;
+    ReactDOM.render(
+        Root,
+        document.getElementById("bootstrapContainer")
+    );
+}).catch((e: Error) => {
+    console.error("issue reading app state from fs ", e.stack);
+});
 
-let store: Store<IAppState> = ReduxConfigDev.configureStore(initialState);
-const Root = <RootComponentDev store={store} routes={rootRoute} />;
-ReactDOM.render(
-    Root,
-    document.getElementById("bootstrapContainer")
-);

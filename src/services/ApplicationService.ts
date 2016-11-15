@@ -7,9 +7,12 @@ import {
     IServiceResponse,
 } from '../types';
 
+import {SERVICES} from '.';
+
 interface IApplicationService extends IService {
     saveApplicationState: (state?: IAppState) => void;
 }
+
 
 namespace ApplicationService {
     const remote = Electron.remote;
@@ -28,11 +31,11 @@ namespace ApplicationService {
             return ElectronApplicationService._instance;
         }
 
-        public execute(request:IServiceRequest):IServiceResponse {
+        public execute(request:IServiceRequest, appState:IAppState):IServiceResponse {
             let response:IServiceResponse;
             switch(request.operation) {
-                case "saveAppState":
-                    response = this.saveApplicationState(request.payload);
+                case SERVICES.appService.operations.saveAppState:
+                    response = this.saveApplicationState(appState);
                     break;
             }
             return response;
@@ -44,6 +47,10 @@ namespace ApplicationService {
 
         public saveApplicationState(state?: IAppState):IServiceResponse {
             console.log("++++called save Application state, state = ", state);
+            console.log("IOUtils = ", IOUtils);
+            //flush application state to fs
+            IOUtils.flushAppStateToFs(state);
+            
             return {
                 status: 200,
                 responseData: "success"

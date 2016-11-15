@@ -14,6 +14,9 @@ import {CALL_SERVICE} from '../../services/ServicesMiddleware';
 import {ICluster} from '../../types';
 import { IMainPageConfig } from '../../Main';
 import {IServiceRequest} from '../../types';
+import {
+    SERVICES,
+} from '../../services';
 
 interface IClusterPageProps extends React.Props<any> {
     createCluster: (clusterData: ICluster) => void;
@@ -40,8 +43,8 @@ class ClusterPage extends AbstractPage<IClusterPageProps> {
             machines:[]
         };
         const serviceRequest:IServiceRequest = {
-            serviceId: "appService",
-            operation: "saveAppState",
+            serviceId: SERVICES.appService.id,
+            operation: SERVICES.appService.operations.saveAppState,
             payload: payload
         };
         this.props.createCluster(
