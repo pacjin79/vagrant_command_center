@@ -10,17 +10,18 @@ import {
 import { Dispatch, connect } from 'react-redux';
 
 import AbstractPage from '../AbstractPage';
-import {CALL_SERVICE} from '../../services/ServicesMiddleware';
-import {ICluster} from '../../types';
+import { CALL_SERVICE } from '../../services/ServicesMiddleware';
+import { ICluster } from '../../types';
 import { IMainPageConfig } from '../../Main';
-import {IServiceRequest} from '../../types';
+import { IServiceRequest } from '../../types';
 import {
     SERVICES,
 } from '../../services';
 
 interface IClusterPageProps extends React.Props<any> {
     createCluster: (clusterData: ICluster) => void;
-    navigate:(path:string) => void;
+    navigate: (path: string) => void;
+    save: () => void;
 }
 
 class ClusterPage extends AbstractPage<IClusterPageProps> {
@@ -37,21 +38,13 @@ class ClusterPage extends AbstractPage<IClusterPageProps> {
             single
         } = values;
         const clusterId = _.snakeCase(clusterName)
-        const payload:ICluster = {
+        const payload: ICluster = {
             clusterId: clusterId,
             clusterName: clusterName,
-            machines:[]
+            machines: []
         };
-        const serviceRequest:IServiceRequest = {
-            serviceId: SERVICES.appService.id,
-            operation: SERVICES.appService.operations.saveAppState,
-            payload: payload
-        };
-        this.props.createCluster(
-            _.merge({}, payload, {
-                [CALL_SERVICE]: serviceRequest
-            })
-        );
+        this.props.createCluster(payload);
+        this.props.save();
         this.props.navigate("/");
     }
 
@@ -100,11 +93,21 @@ const mapStateToProps = (state: any, ownProps: any) => {
 }
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
     const {
-        clusterActions
+        clusterActions,
+        pageActions
     } = actions;
     return {
         createCluster(clusterData: ICluster) {
             dispatch(clusterActions.createCluster(clusterData));
+        },
+        save() {
+            const payload: any = {
+                [CALL_SERVICE]: {
+                    serviceId: SERVICES.appService.id,
+                    operation: SERVICES.appService.operations.saveAppState
+                }
+            };
+            dispatch(pageActions.save(payload));
         }
     };
 }

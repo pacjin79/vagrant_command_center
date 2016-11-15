@@ -64,7 +64,7 @@ export interface IServiceResponse {
 export interface IServiceRequest {
     serviceId:string;
     operation: string;
-    payload: any;
+    payload?: any;
 }
 export interface IService {
     execute: (request:IServiceRequest, appState: IAppState)=>IServiceResponse | void;

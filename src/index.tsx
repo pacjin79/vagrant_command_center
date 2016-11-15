@@ -40,6 +40,13 @@ const rootRoute: PlainRoute = {
 
 const IOUtils = remote.require('./local/IOUtils');
 IOUtils.loadAppStateFromFs().then((data: Buffer) => {
+    initialize(data);
+}).catch((e: Error) => {
+    console.error("issue reading app state from fs ", e.stack);
+    initialize();
+});
+
+function initialize(data?:Buffer){
     let initialState: IAppState = {
         currentPage: {
             notifications: []
@@ -56,7 +63,4 @@ IOUtils.loadAppStateFromFs().then((data: Buffer) => {
         Root,
         document.getElementById("bootstrapContainer")
     );
-}).catch((e: Error) => {
-    console.error("issue reading app state from fs ", e.stack);
-});
-
+}
