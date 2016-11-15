@@ -10,10 +10,7 @@ import {
 
 export const clusters = handleActions({
     [CLUSTER_ACTIONS.CREATE_CLUSTER]: (clusters:ICluster[], action: Action<any>) => {
-        const cluster:ICluster = {
-            clusterId: action.payload,
-            machines: []
-        };
+        const cluster = action.payload as ICluster;
         return ClusterHelper.addCluster(clusters, cluster);
     }
 });

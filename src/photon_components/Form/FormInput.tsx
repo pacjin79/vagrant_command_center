@@ -24,7 +24,8 @@ class Forminput extends React.Component<IForminput, void> {
             label,
             value,
             bsSize = "md",
-            placeholder
+            placeholder,
+            required = false
         } = this.props;
 
         const style = classnames({
@@ -39,6 +40,7 @@ class Forminput extends React.Component<IForminput, void> {
                     label={label}
                     layout="vertical"
                     value={value}
+                    required
                     placeholder={placeholder}
                     />
             </div>

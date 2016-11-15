@@ -91,6 +91,13 @@ form {
     width: 50%;
 }
 
+form .checkbox-label {
+    margin-right: $margin-gap-sm;
+    float: left!important;
+}
+
+//layout
+
 .container {
     margin-top: 20px;
 }
@@ -102,6 +109,9 @@ form {
     width: 100%;
 }
 
+table td {
+    border-bottom: 1px solid $border-color
+}
 //gaps
 .margin-xs {
     @include make-margin-gap("xs", "xs", "xs", "xs");
