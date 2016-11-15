@@ -44,7 +44,7 @@ class LandingPage extends AbstractPage<ILandingPageProps> {
         const navData: _.Dictionary<INavItemModel[]> = {
             btnGrp1: [
                 {
-                    path: "/confos",
+                    path: "/confCluster",
                     icon: "plus",
                     onClick: this.onNavItemClick.bind(this)
                 },
