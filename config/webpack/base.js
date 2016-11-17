@@ -1,9 +1,10 @@
 const path = require("path"),
 	webpack = require("webpack"),
 	srcPath = path.join(__dirname, '../..', 'src'),
+	modulePath = path.join(__dirname, '../..', 'node_modules'),
 	staticPath = path.join(__dirname, '../..', 'static'),
 	buildPath = path.join(__dirname, '../..', 'build');
-	HtmlWebpackPlugin = require('html-webpack-plugin');
+HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const commonLibs = [
 	"react",
@@ -32,7 +33,11 @@ const baseConfig = {
 		root: srcPath,
 		moduleDirectories: ['node_modules'],
 		extensions: ['', '.js', '.ts', '.tsx', '.css'],
-		packageMains: ['webpack', 'main']
+		packageMains: ['webpack', 'main'],
+		alias: {
+			'dust.core': 'dustjs-linkedin',
+			'dust.parse': 'dustjs-linkedin'
+		}
 	},
 	output: {
 		path: buildPath,
@@ -50,8 +55,8 @@ const baseConfig = {
 				test: /\.(ts|tsx)?$/,
 				loaders: ["ts-loader"]
 			},
-			{test: /\.css?$/, loader: "style!css"},
-			{test: /\.less$/, loader: 'style!css!less'},
+			{ test: /\.css?$/, loader: "style!css" },
+			{ test: /\.less$/, loader: 'style!css!less' },
 			{
 				test: /\.scss$/,
 				loader: "style-loader!raw-loader!sass-loader?includePaths[]=" + path.resolve(__dirname, "./node_modules/compass-mixins/lib")

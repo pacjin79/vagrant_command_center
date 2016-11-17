@@ -10,13 +10,14 @@ import {
 import { Dispatch, connect } from 'react-redux';
 
 import AbstractPage from '../AbstractPage';
-import { CALL_SERVICE } from '../../services/ServicesMiddleware';
 import { ICluster } from '../../types';
 import { IMainPageConfig } from '../../Main';
 import { IServiceRequest } from '../../types';
+import {PageHelper} from '../../helpers';
 import {
     SERVICES,
 } from '../../services';
+import { ServiceConstants } from '../../constants';
 
 interface IClusterPageProps extends React.Props<any> {
     createCluster: (clusterData: ICluster) => void;
@@ -101,13 +102,7 @@ const mapDispatchToProps = (dispatch: Dispatch<any>) => {
             dispatch(clusterActions.createCluster(clusterData));
         },
         save() {
-            const payload: any = {
-                [CALL_SERVICE]: {
-                    serviceId: SERVICES.appService.id,
-                    operation: SERVICES.appService.operations.saveAppState
-                }
-            };
-            dispatch(pageActions.save(payload));
+            dispatch(pageActions.save(PageHelper.createSaveAppStateRequest()));
         }
     };
 }

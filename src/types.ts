@@ -9,9 +9,38 @@ interface IPageProperties {
     notifications: Array<Notification>;
 }
 
+export interface ISyncFolder {
+    hostFolder: string;
+    guestFolder: string;
+}
+
+export interface IForwardPort {
+    type: "forwarded_port";
+    guest_port: number;
+    host_port: number;
+    host_ip?: number;
+    guest_id?: number;
+    protocol?: "udp" | "tcp";
+
+}
+
+export interface IPrivateNetwork {
+    type: "private";
+    ip: string;
+}
+
+export interface IVMProvider {
+    providerName: string;
+    config: {
+        memory: string;
+        cpus: string;
+    };
+}
+
 export interface IMachine {
     boxName: string;
-    vmProviderName: string;
+    vmProvider: IVMProvider;
+    network: IPrivateNetwork | IForwardPort;
 }
 
 export interface ICluster {

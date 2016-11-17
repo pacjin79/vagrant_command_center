@@ -9,8 +9,8 @@ import { INavEnabledProps, INavItemModel } from './types';
 import { goBack, goForward, push } from 'react-router-redux';
 
 import AbstractPage from './pages/AbstractPage';
-import { CALL_SERVICE } from './services/ServicesMiddleware';
 import HeaderNav from './components/HeaderNav/HeaderNav';
+import { ServiceConstants } from './constants';
 import SideNav from './components/SideNav/SideNav';
 import { actions } from './actions';
 

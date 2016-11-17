@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 import { INavEnabledProps, INavItemModel, INavModel } from '../../types';
 
-import { CALL_SERVICE } from '../../services/ServicesMiddleware';
+import {ServiceConstants} from '../../constants';
 
 interface IHeaderNavProps extends INavModel {
     location: History.Location;
@@ -29,7 +29,7 @@ class HeaderNav extends React.Component<IHeaderNavProps, void> {
     handleSave() {
         console.log("handle save props = ", this.props)
         this.props.save({
-            [CALL_SERVICE]: "save"
+            [ServiceConstants.CALL_SERVICE]: "save"
         })
     }
 

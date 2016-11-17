@@ -17,6 +17,8 @@ import {
 import Card from '../../components/Card/Card';
 import HeaderNav from '../../components/HeaderNav/HeaderNav';
 import { IMainPageConfig } from '../../Main';
+import {PageHelper} from '../../helpers';
+import {actions} from '../../actions';
 import { push } from 'react-router-redux';
 
 import SplitPane = require('react-split-pane');
@@ -24,7 +26,10 @@ import SplitPane = require('react-split-pane');
 
 interface ILandingPageProps extends React.Props<any> {
     navigate: (path: string) => void;
+    removeCluster: (clusterId:string) => void;
+    genVagrantFile: (clusterId:string) => void;
     clusters: Array<ICluster>;
+    save:() => void;
 }
 
 class LandingPage extends AbstractPage<ILandingPageProps> {
@@ -32,10 +37,24 @@ class LandingPage extends AbstractPage<ILandingPageProps> {
     constructor(props: ILandingPageProps) {
         super(props);
         this.getNavData = this.getNavData.bind(this);
+        this.onClusterConfig = this.onClusterConfig.bind(this);
+        this.onClusterDelete = this.onClusterDelete.bind(this);
+        this.onClusterGenVagFile = this.onClusterGenVagFile.bind(this);
+    }
+
+    onClusterGenVagFile(clusterId:string) {
+        this.props.genVagrantFile(clusterId);
+    }
+
+    onClusterConfig(eventKey:string){
+    }
+
+    onClusterDelete(eventKey:string){
+        this.props.removeCluster(eventKey);
+        this.props.save();
     }
 
     onNavItemClick(eventKey: string) {
-        console.log("here in landing page event key = " + eventKey);
         this.props.navigate(eventKey);
     }
 
@@ -79,8 +98,9 @@ class LandingPage extends AbstractPage<ILandingPageProps> {
                 actions:
                 <Photon.ToolBar>
                     <Photon.ButtonGroup>
-                        <Photon.Button icon="cog" />
-                        <Photon.Button icon="cancel" />
+                        <Photon.Button icon="cog" eventKey={cluster.clusterId} onClick={this.onClusterConfig}/>
+                        <Photon.Button icon="download" eventKey={cluster.clusterId} onClick={this.onClusterGenVagFile} />
+                        <Photon.Button icon="cancel" eventKey={cluster.clusterId} onClick={this.onClusterDelete} />
                     </Photon.ButtonGroup>
                 </Photon.ToolBar>
             }
@@ -99,7 +119,24 @@ const mapStateToProps = (state: any, ownProps: any) => {
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
+    const {
+        removeCluster,
+        genVagrantFile
+    } = actions.clusterActions;
+    const {
+        save
+    } = actions.pageActions;
+    
     return {
+        removeCluster: (clusterId:string) => {
+            dispatch(removeCluster(clusterId));
+        },
+        save() {
+            dispatch(save(PageHelper.createSaveAppStateRequest()));
+        },
+        genVagrantFile: (clusterId:string) => {
+            dispatch(genVagrantFile(clusterId));
+        }
     };
 }
 export default connect(

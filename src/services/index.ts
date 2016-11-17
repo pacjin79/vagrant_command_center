@@ -1,12 +1,13 @@
 import { IService, IServiceResponse } from '../types';
 
-import { AppService } from './ApplicationService'
+import {AppService} from './ApplicationServices/ApplicationService';
 
 export const SERVICES = {
     appService: {
         id: AppService.provideId(),
         operations: {
-            saveAppState: "saveAppState"
+            saveAppState: "saveAppState",
+            generateVagFile: "generateVagFile"
         }
     }
 };
