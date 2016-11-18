@@ -1,10 +1,9 @@
-import * as Photon from '../../photon_components';
-import * as React from 'react';
-import * as _ from 'lodash';
-
-import { INavEnabledProps, INavItemModel, INavModel } from '../../types';
-
-import {ServiceConstants} from '../../constants';
+import * as Photon from "../../photon_components";
+import * as React from "react";
+import * as _ from "lodash";
+import {INavItemModel, INavModel} from "../../types";
+import {ServiceConstants} from "../../constants";
+import * as History from 'history';
 
 interface IHeaderNavProps extends INavModel {
     location: History.Location;

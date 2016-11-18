@@ -1,5 +1,6 @@
 import * as Photon from '../../photon_components';
 import * as React from 'react';
+import * as History from 'history';
 
 import { INavItemModel, INavModel } from '../../types';
 

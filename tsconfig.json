@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "types": [
-        "node"
-    ],
     "target": "es5",
     "moduleResolution": "node",
     "baseUrl": "src",

@@ -13,6 +13,7 @@ import HeaderNav from './components/HeaderNav/HeaderNav';
 import { ServiceConstants } from './constants';
 import SideNav from './components/SideNav/SideNav';
 import { actions } from './actions';
+import * as History from 'history';
 
 import SplitPane = require('react-split-pane');
 
