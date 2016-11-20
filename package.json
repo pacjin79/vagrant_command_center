@@ -5,8 +5,8 @@
   "main": "src/index.tsx",
   "scripts": {
     "build": "NODE_ENV=production node_modules/webpack/bin/webpack.js --config config/webpack/prod.js --progress --profile --colors",
-    "startDev": "cross-env NODE_ENV=development node devServer.js",
-    "startHot": "cross-env HOT=1 NODE_ENV=development electron ./build/entry.js",
+    "startDev": "cross-env NODE_ENV=dev node devServer.js",
+    "startHot": "cross-env HOT=1 NODE_ENV=dev electron ./build/entry.js",
     "kickoff": "concurrently --kill-others \"yarn run startDev\" \"yarn run startHot\"",
     "dev": "node run.js",
     "test:fe": "node_modules/.bin/karma start karma.config.js",
