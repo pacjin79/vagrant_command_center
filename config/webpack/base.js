@@ -3,6 +3,7 @@ const path = require("path"),
 	srcPath = path.join(__dirname, '../..', 'src'),
 	modulePath = path.join(__dirname, '../..', 'node_modules'),
 	staticPath = path.join(__dirname, '../..', 'static'),
+	mainPath = path.join(__dirname, '../..', 'main'),
 	buildPath = path.join(__dirname, '../..', 'build');
 HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -23,12 +24,6 @@ const commonLibs = [
 ];
 
 const baseConfig = {
-	entry: {
-		app: [
-			path.join(srcPath, "index")
-		],
-		common: commonLibs
-	},
 	resolve: {
 		root: srcPath,
 		moduleDirectories: ['node_modules'],

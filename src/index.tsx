@@ -39,14 +39,14 @@ const rootRoute: PlainRoute = {
 };
 
 const IOUtils = remote.require('./local/IOUtils');
-IOUtils.loadAppStateFromFs().then((data: Buffer) => {
+IOUtils.loadAppStateFromFs().then((data: IAppState) => {
     initialize(data);
 }).catch((e: Error) => {
     console.error("issue reading app state from fs ", e.stack);
     initialize();
 });
 
-function initialize(data?:Buffer){
+function initialize(data?:IAppState){
     let initialState: IAppState = {
         currentPage: {
             notifications: []
@@ -54,7 +54,7 @@ function initialize(data?:Buffer){
         clusters: []
     };
     if(data) {
-        initialState = JSON.parse(data.toString());
+        initialState = data;
     }
 
     let store: Store<IAppState> = ReduxConfigDev.configureStore(initialState);
