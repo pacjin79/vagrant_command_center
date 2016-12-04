@@ -15,6 +15,15 @@ devConfig.entry = {
 	]
 }
 
+devConfig.module.preLoaders = [{
+	test: /\.(ts|tsx)?$/,
+	loader: 'tslint-loader'
+}];
+
+devConfig.tslint = {
+	configFile: "tslint.json"
+}
+
 devConfig.devtool = "source-map";
 
 devConfig.debug = true;

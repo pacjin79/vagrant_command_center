@@ -5,14 +5,14 @@ import * as ReactDOM from 'react-dom';
 import ConfigClusterPage from './pages/ConfigClusterPage/ConfigClusterPage';
 import ConfigOSPage from './pages/ConfigOS/ConfigOSPage';
 import ConfigProvider from './pages/ConfigProvider/ConfigProvider';
-import { IAppState } from "./types";
+import { IAppState } from './types';
 import LandingPage from './pages/Landing/LandingPage';
-import Main from "./Main";
+import Main from './Main';
 import { PlainRoute } from 'react-router';
 import { ReduxConfigDev } from '../config/redux/dev';
 import { ReduxConfigProd } from '../config/redux/prod';
 import RootComponentDev from 'RootComponentDev';
-import { Store } from "redux";
+import { Store } from 'redux';
 
 const remote = Electron.remote;
 
@@ -42,7 +42,7 @@ const IOUtils = remote.require('./local/IOUtils');
 IOUtils.loadAppStateFromFs().then((data: IAppState) => {
     initialize(data);
 }).catch((e: Error) => {
-    console.error("issue reading app state from fs ", e.stack);
+    console.error('issue reading app state from fs ', e.stack);
     initialize();
 });
 
@@ -53,7 +53,7 @@ function initialize(data?:IAppState){
         },
         clusters: []
     };
-    if(data) {
+    if (data) {
         initialState = data;
     }
 
@@ -61,6 +61,6 @@ function initialize(data?:IAppState){
     const Root = <RootComponentDev store={store} routes={rootRoute} />;
     ReactDOM.render(
         Root,
-        document.getElementById("bootstrapContainer")
+        document.getElementById('bootstrapContainer')
     );
 }

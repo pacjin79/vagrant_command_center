@@ -6,6 +6,8 @@ const getUserDir = () => {
 
 const configDir = getUserDir() + '/.vagrant_cc';
 
+console.log("config Dir = " + configDir);
+
 const config = {
     applicationConfigDir: configDir,
     appStateFilepath: configDir + '/lastAppState.json',
