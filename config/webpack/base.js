@@ -27,7 +27,7 @@ const baseConfig = {
 	resolve: {
 		root: srcPath,
 		moduleDirectories: ['node_modules'],
-		extensions: ['', '.js', '.ts', '.tsx', '.css'],
+		extensions: ['', '.js', '.jsx', '.ts', '.tsx', '.css'],
 		packageMains: ['webpack', 'main'],
 		alias: {
 			'dust.core': 'dustjs-linkedin',

@@ -9,7 +9,6 @@
         ],
         "member-ordering": [
             true,
-            "public-before-private",
             "static-before-instance",
             "variables-before-functions"
         ],
@@ -37,6 +36,9 @@
                 "multiline": "never",
                 "singleline": "never"
             }
+        ],
+        "only-arrow-functions": [
+            false
         ]
     }
 }

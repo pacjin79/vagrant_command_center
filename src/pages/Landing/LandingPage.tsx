@@ -24,7 +24,7 @@ import { push } from 'react-router-redux';
 import SplitPane = require('react-split-pane');
 
 
-interface ILandingPageProps extends React.Props<any> {
+interface ILandingPageProps extends IAbstractPageProps{
     navigate: (path: string) => void;
     removeCluster: (clusterId:string) => void;
     genVagrantFile: (clusterId:string) => void;
@@ -32,7 +32,7 @@ interface ILandingPageProps extends React.Props<any> {
     save:() => void;
 }
 
-class LandingPage extends AbstractPage<ILandingPageProps> {
+export class LandingPage extends AbstractPage<ILandingPageProps> {
 
     constructor(props: ILandingPageProps) {
         super(props);
@@ -42,40 +42,40 @@ class LandingPage extends AbstractPage<ILandingPageProps> {
         this.onClusterGenVagFile = this.onClusterGenVagFile.bind(this);
     }
 
-    onClusterGenVagFile(clusterId:string) {
+    private onClusterGenVagFile(clusterId:string) {
         this.props.genVagrantFile(clusterId);
     }
 
-    onClusterConfig(eventKey:string){
+    private onClusterConfig(eventKey:string){
     }
 
-    onClusterDelete(eventKey:string){
+    private onClusterDelete(eventKey:string){
         this.props.removeCluster(eventKey);
         this.props.save();
     }
 
-    onNavItemClick(eventKey: string) {
+    private onNavItemClick(eventKey: string) {
         this.props.navigate(eventKey);
     }
 
-    provideConfigMain(): IMainPageConfig {
+    public provideConfigMain(): IMainPageConfig {
         return {
             hasSideMenu: false,
             customHeaderNavdata: this.getNavData()
         };
     }
 
-    getNavData(): _.Dictionary<INavItemModel[]> {
+    private getNavData(): _.Dictionary<INavItemModel[]> {
         const navData: _.Dictionary<INavItemModel[]> = {
             btnGrp1: [
                 {
-                    path: "/confCluster",
-                    icon: "plus",
+                    path: '/confCluster',
+                    icon: 'plus',
                     onClick: this.onNavItemClick.bind(this)
                 },
                 {
-                    path: "/startAll",
-                    icon: "play",
+                    path: '/startAll',
+                    icon: 'play',
                     onClick: this.onNavItemClick.bind(this)
                 }
             ]
@@ -83,18 +83,18 @@ class LandingPage extends AbstractPage<ILandingPageProps> {
         return navData;
     }
 
-    render() {
+    public render() {
         const tableHeaders = [
-            { key: "clusterName", displayName: "Cluster Name" },
-            { key: "numOfMachines", displayName: "Number of Machines" },
-            { key: "status", displayName: "Status" },
-            { key: "actions", displayName: "" }
+            { key: 'clusterName', displayName: 'Cluster Name' },
+            { key: 'numOfMachines', displayName: 'Number of Machines' },
+            { key: 'status', displayName: 'Status' },
+            { key: 'actions', displayName: '' }
         ];
         const tableRows = _(this.props.clusters).map((cluster: ICluster) => {
             return {
                 clusterName: cluster.clusterName,
                 numOfMachines: cluster.machines.length,
-                status: "active",
+                status: 'active',
                 actions:
                 <Photon.ToolBar>
                     <Photon.ButtonGroup>
@@ -115,7 +115,7 @@ class LandingPage extends AbstractPage<ILandingPageProps> {
 const mapStateToProps = (state: any, ownProps: any) => {
 
     return {
-        clusters: state.clusters["present"]
+        clusters: state.clusters['present']
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch<any>) => {
